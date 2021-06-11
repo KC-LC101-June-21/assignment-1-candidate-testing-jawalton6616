@@ -28,7 +28,7 @@ let candidateAnswers = [];
 function askForName() {
   // TODO 1.1b: Ask for candidate's name
   candidateName = input.question("Please enter your name. ")
-  console.log(`Welcome ${candidateName}!`);
+  console.log(`Welcome ${candidateName}!\n`);
 }
 
 function askQuestion() {
@@ -37,13 +37,15 @@ function askQuestion() {
     candidateAnswers[i] = input.question(questions[i]);
     candidateAnswers.push(candidateAnswer);
     if (candidateAnswers[i].toLowerCase().trim() === correctAnswers[i].toLowerCase().trim()) {
-      console.log("Correct!");
+      console.log("Correct!\n");
     }
     else {
       console.log("Incorrect");
+      console.log(`Correct answer: ${correctAnswers[i]}\n`)
     }
+    
   }
-console.log(`Your answers: ${candidateAnswers} \n Correct answers: ${correctAnswers}`)
+console.log(`\nYour answers: ${candidateAnswers} \nCorrect answers: ${correctAnswers}\n`)
 }
 
 function gradeQuiz(candidateAnswers) {
@@ -54,10 +56,19 @@ function gradeQuiz(candidateAnswers) {
       grade++
     }
   }
+  grade = (grade / questions.length) * 100;
 
-  grade = grade/questions.length * 100;
+// >>> Overall Grade: 40% (2 of 5 responses correct) <<<
+// >>> Status: FAILED <<<
 
-  console.log(`\n Your grade is ${grade}%`)
+  console.log(`\nOverall Grade:${grade}% (${grade/10/2} of 5 responses correct)`)
+  
+  if (grade >= 80){
+    console.log('>>> SATUS: PASSED <<<')
+  }
+  else{
+    console.log('>>> STATUS: FAILED <<<')
+  }
 
   return grade;
 }
